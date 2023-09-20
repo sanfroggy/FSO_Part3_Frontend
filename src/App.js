@@ -132,7 +132,7 @@ const App = (props) => {
                     setTimeout(() => {
                         setMessage(null)
                     }, 3500)
-                    //console.error('There was an error!', error);
+                    console.error('There was an error!', error);
                 });
             setNewName('')
             setNewNumber('')
