@@ -14,7 +14,7 @@ const createContact = newContact => {
 }
 
 /*Creating a function to provide an already existing contact
-with a new number on JSON Server. */
+with a new number on Node backend. */
 const updateContact = (contactId, newObject) => {
     const request = axios.put(`${baseUrl}/${contactId}`, newObject)
     return request.then(response => response.data)
