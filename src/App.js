@@ -128,11 +128,11 @@ const App = (props) => {
                     setPersons(persons.concat(createdContact))
                 }).catch(error => {
                     setError(true)
-                    setMessage(`${personObject.name} could not be added to the list of contacts.`)
+                    setMessage(`${error.response.data.error.substring(0, 27)}${error.response.data.error.substring(33)}`)
                     setTimeout(() => {
                         setMessage(null)
                     }, 3500)
-                    console.error('There was an error!', error);
+                    //console.error('There was an error!', error);
                 });
             setNewName('')
             setNewNumber('')
