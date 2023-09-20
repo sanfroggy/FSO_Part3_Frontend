@@ -14,11 +14,11 @@ const createContact = newContact => {
 }
 
 /*Creating a function to provide an already existing contact
-with a new number on JSON Server. 
+with a new number on JSON Server. */
 const updateContact = (contactId, newObject) => {
     const request = axios.put(`${baseUrl}/${contactId}`, newObject)
     return request.then(response => response.data)
-} */
+} 
 
 //Creating a function to delete a contact from Node backend.
 const deleteContact = (contactId) => {
@@ -28,4 +28,4 @@ const deleteContact = (contactId) => {
 }
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default { getAll, createContact, /*updateContact,*/ deleteContact }
+export default { getAll, createContact, updateContact, deleteContact }
