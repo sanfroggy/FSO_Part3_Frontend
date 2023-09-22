@@ -130,6 +130,7 @@ const App = (props) => {
         }).catch(error => {
           let timeout = 0
           setError(true)
+          console.log(error.response.data.error.length)
 
           /*Editing the shown error message to correct format accoriding to it's content
                               and making sure the user has enough time to read the message. */
@@ -140,6 +141,11 @@ const App = (props) => {
           if (error.response.data.error.includes('number:')) {
             setMessage(`${error.response.data.error.substring(35)}`)
             timeout = 3500
+          }
+          if (error.response.data.error.length === 124) {
+            setMessage(`${error.response.data.error.substring(33, 64)}
+                        and n${error.response.data.error.substring(76)}`)
+            timeout = 7000
           }
           if (error.response.data.error.length > 127 && error.response.data.error.length !== 141) {
             setMessage(`${error.response.data.error.substring(33, 83)}
