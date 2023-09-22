@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/react-in-jsx-scope */
 import '../index.css'
 
 /*Defining the Notification component containing a message to be displayed,
@@ -6,23 +8,23 @@ according to the value of received isError. The 2 usable styles are
 defined in the imported index.css file */
 const Notification = ({ message, isError }) => {
 
-    if (message === null) {
-        return null
+  if (message === null) {
+    return null
+  } else {
+    if (isError === false) {
+      return (
+        <div className="success">
+          {message}
+        </div>
+      )
     } else {
-        if (isError === false) {
-            return (
-                <div className="success">
-                    {message}
-                </div>
-            )
-        } else {
-            return (
-                <div className="error">
-                    {message}
-                </div>
-            )
-        }
+      return (
+        <div className="error">
+          {message}
+        </div>
+      )
     }
+  }
 
 }
 
