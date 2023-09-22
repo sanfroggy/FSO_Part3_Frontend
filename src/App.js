@@ -117,7 +117,7 @@ const App = (props) => {
                 number: newNumber
             }
             personService.createContact(personObject)
-                .then(createdContact => {
+                .then(createdContact => {               
                     setError(false)
                     setMessage(`${createdContact.name} was successfully added to the list of contacts.`)
                     setTimeout(() => {
@@ -127,12 +127,27 @@ const App = (props) => {
                         contact.name.toLowerCase().indexOf(showNames.toLowerCase()) >= 0))
                     setPersons(persons.concat(createdContact))
                 }).catch(error => {
+                    let timeout = 0
                     setError(true)
-                    setMessage(`${error.response.data.error.substring(0, 27)}${error.response.data.error.substring(33)}`)
+
+                    /*Editing the shown error message to correct format accoriding to it's content
+                    and making sure the user has enough time to read the message. */
+                    if (error.response.data.error.includes('name:')) {
+                        setMessage(`${error.response.data.error.substring(33)}`)
+                        timeout = 3500
+                    }
+                    if (error.response.data.error.includes('number:')) {
+                        setMessage(`${error.response.data.error.substring(35)}`)
+                        timeout = 3500
+                    }
+                    if (error.response.data.error.length > 127 && error.response.data.error.length !== 141) {
+                        setMessage(`${error.response.data.error.substring(33, 83)}
+                        and n${error.response.data.error.substring(95)}`)
+                        timeout = 7000
+                    }
                     setTimeout(() => {
                         setMessage(null)
-                    }, 3500)
-                    console.error('There was an error!', error);
+                    }, timeout)
                 });
             setNewName('')
             setNewNumber('')
